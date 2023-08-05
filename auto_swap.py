@@ -15,9 +15,9 @@ class MultipleCentralSymbols(RuntimeError):
 
 
 def auto_swap(s: str) -> str:
-    symbols = "=+-*/<>,:"
-    openings = "([{"
-    closings = ")]}"
+    symbols = "=+-*/,"
+    openings = "([{<"
+    closings = ")]}>"
     assert len(openings) == len(closings)
     strings = "\"'"
 

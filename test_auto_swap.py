@@ -4,7 +4,7 @@ from auto_swap import *
 
 class Test(TestCase):
     def test_simple(self):
-        for c in "=+-*/,:":
+        for c in "=+-*/,":
             self.assertEqual(auto_swap("a" + c + "b"), "b" + c + "a")
             self.assertEqual(auto_swap("aa" + c + "b"), "b" + c + "aa")
             self.assertEqual(auto_swap("a " + c + " b"), "b " + c + " a")
@@ -41,6 +41,10 @@ class Test(TestCase):
     def test_string_not_closed(self):
         self.assertRaises(MissingClosing, auto_swap, "'a, b")
         self.assertRaises(MissingClosing, auto_swap, "'\"a, b\"")
+
+    def test_cpp_namespaces(self):
+        self.assertEqual(auto_swap("foo:Foo a, bar::Bar b"), "bar::Bar b, foo:Foo a")
+        self.assertEqual(auto_swap("const std::vector<int> &a, const std::vector<int> &b"), "const std::vector<int> &b, const std::vector<int> &a")
 
     def test0(self):
         self.assertEqual(auto_swap('result, "adj.&cn. required, necessary."'), '"adj.&cn. required, necessary.", result')
